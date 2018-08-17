@@ -1,0 +1,77 @@
+\section{Virtual tensor machine}\label{sec:analyticVmachine}
+
+In this section we provide a minimal implementation of a virtual tensor machine, together with the pullback of \eqref{q:sumd} through an arbitrary program. This is equivalent to the projection of the operator of program composition to the unit hyper-cube. 
+
+\begin{definicija}[Virtual tensor machine]
+The tuple $M=\langle \VV,\dP_0\rangle$ is an analytic, infinitely  differentiable virtual machine, where
+   
+    \begin{itemize}
+    \item
+    $\VV$ is a finite dimensional vector space
+    \item
+    $\VV\otimes T(\VV^*)$ is the virtual memory space
+    \item
+    $\dP_0$ is an analytic programming space over $\VV$.
+    \end{itemize}
+  \end{definicija}
+
+  \subsection{Operators}\label{sec:operators}
+        
+        The operator of tensor series expansion \cite[Theorem~17]{OperationalCalculus}
+        
+        \begin{equation}\label{eq:specProg}
+                  	e^{h\D}:\dP\times \VV\to \VV\otimes \T(\VV^*),
+                  \end{equation}
+        
+        \begin{equation}
+         	e^{h\D}=\sum\limits_{n=0}^{\infty}\frac{(h\D)^n}{n!}
+         \end{equation}
+         is evaluated at $h=1$ and projected onto the unit N-cube, arriving at 
+        \begin{equation}\label{eq:DD}
+          	\sumd_N = 1+\D +\D^2 +\ldots + \D^N,
+          \end{equation}
+        which is used to implement $\DD^n\CC\subset\dP_n$, employing the recursive relation for increasing the order of $\CC$ \cite[Proposition~11]{OperationalCalculus}.
+        \begin{equation}
+              \label{eq:rekurzija}
+              \sumd_{k+1} = 1+\D\sumd_k,
+            \end{equation}
+        \begin{equation}
+        \sumd_{k+1}\CC = \CC+\D\sumd_k\CC.
+        \end{equation}
+        
+        The \emph{double id} stands for the identity operator $1$ in the expression and the \emph{map<var*, var> dTau} for the operator $\D\sumd_k$.
+        
+        Compositions of these operators is achieved by mimicking the generalized pullback operator \cite[Remark~11]{OperationalCalculus}
+        \begin{equation}\label{eq:opKompo}
+          \exp(\D_fe^{h\D_g})(g): \dP\to\dP_\infty(g),
+          \end{equation}
+          projected onto the unit N-cube.
+          
+          \begin{opomba}
+          Implementation in this paper is intended to be simply understood and is written as such. But, with the existing algebra and operational calculus, one could easily implement the operator $\exp(\D_fe^{h\D_g})(g)$ by any of the efficient techniques available, as it is given by a generating function.
+          \end{opomba}
+        
+\begin{lstlisting}
+template<class dTau, class K>
+class tau
+{
+public:
+    tau();
+    tau(K mapping, dTau primitive);
+    ~tau();
+    var operator()(const var&v);
+private:
+    dTau primitive;
+    K mapping;
+};
+\end{lstlisting}        
+        
+\begin{lstlisting}
+var tau::operator()(const var&v){
+    var out;
+    out.id=mapping(v.id);
+    for_each_copy(...,mul_make_pair<std::pair<var*,var> >, 
+      primitive(v.reduce()));
+    return out;
+}
+\end{lstlisting}
