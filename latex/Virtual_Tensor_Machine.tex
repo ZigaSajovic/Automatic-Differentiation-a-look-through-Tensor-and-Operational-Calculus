@@ -16,28 +16,36 @@ The tuple $M=\langle \VV,\dP_0\rangle$ is an analytic, infinitely  differentiabl
   \end{definicija}
 
   \subsection{Operators}\label{sec:operators}
-        
-        The operator of tensor series expansion \cite[Theorem~5.1]{OperationalCalculus}
-        
-        \begin{equation}\label{eq:specProg}
-                  	e^{h\D}:\dP\to\VV\to \VV\otimes \T(\VV^*),
-                  \end{equation}
-        
-        \begin{equation}
-         	e^{h\D}=\sum\limits_{n=0}^{\infty}\frac{(h\D)^n}{n!}
-         \end{equation}
-         is evaluated at $h=1$ and projected onto the unit N-cube, arriving at 
-        \begin{equation}\label{eq:DD}
-          	\sumd_N = 1+\D +\D^2 +\ldots + \D^N,
+
+The operator of tensor series expansion \cite[Theorem~5.1]{OperationalCalculus}
+
+\begin{equation}\label{eq:specProg}
+            e^{h\D}:\dP\to\VV\to \VV\otimes \T(\VV^*),
           \end{equation}
-        which is used to implement $\DD^n\CC\subset\dP_n$, employing the recursive relation for increasing the order of $\CC$ \cite[Proposition~5.1]{OperationalCalculus}.
-        \begin{equation}
-              \label{eq:rekurzija}
-              \sumd_{k+1} = 1+\D\sumd_k,
-            \end{equation}
-        \begin{equation}
-        \sumd_{k+1}\CC = \CC+\D\sumd_k\CC.
-        \end{equation}
+
+\begin{equation}
+  e^{h\D}=\sum\limits_{n=0}^{\infty}\frac{(h\D)^n}{n!}
+ \end{equation}
+ is evaluated at $h=1$ and projected onto the unit $N$-cube, arriving at 
+\begin{equation}\label{eq:DD}
+    \sumd_N = 1+\D +\D^2 +\ldots + \D^N.
+  \end{equation}
+The expression \eqref{eq:DD} obeys the recursive relation
+\begin{equation}
+      \label{eq:rekurzija}
+      \sumd_{k+1} = 1+\D\sumd_k,
+    \end{equation}
+which can be used for constructing programming spaces of arbitrary order.
+
+
+which is used to implement $\DD^n\CC\subset\dP_n$, employing the recursive relation for increasing the order of $\CC$ \cite[Proposition~5.1]{OperationalCalculus}.
+\begin{equation}
+      \label{eq:rekurzija}
+      \sumd_{k+1} = 1+\D\sumd_k,
+    \end{equation}
+\begin{equation}
+\sumd_{k+1}\CC = \CC+\D\sumd_k\CC.
+\end{equation}
         
         The \emph{double id} stands for the identity operator $1$ in the expression and the \emph{map<var*, var> dTau} for the operator $\D\sumd_k$.
         
