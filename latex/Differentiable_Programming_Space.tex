@@ -54,10 +54,10 @@ The expression \eqref{eq:DD} obeys the recursive relation
       \label{eq:rekurzija}
       \sumd_{k+1} = 1+\D\sumd_k,
     \end{equation}
-which can be used for constructing programming spaces of arbitrary order \cite[Proposition~5.1]{OperationalCalculus}. 
+which can be used for constructing programming spaces of arbitrary order. Note that only explicit knowledge of $\tau_1:\dP_0\to\dP_1$ is required \cite[Proposition~5.1]{OperationalCalculus}. 
 
 
-which is used to implement $\DD^n\CC\subset\dP_n$, employing the recursive relation for increasing the order of $\CC$ \cite[Proposition~5.1]{OperationalCalculus}.
+which is used to implement $\DD^n\CC\subset\dP_n$, employing the recursive relation for increasing the order of $\CC$. Note that only explicit knowledge of $\tau_1:\dP_0\to\dP_1$ is required \cite[Proposition~5.1]{OperationalCalculus}.
 \begin{equation}
       \label{eq:rekurzija}
       \sumd_{k+1} = 1+\D\sumd_k,
@@ -74,9 +74,7 @@ which is used to implement $\DD^n\CC\subset\dP_n$, employing the recursive relat
           \end{equation}
           projected onto the unit N-cube.
           
-          \begin{opomba}
-          Implementation in this paper is intended to be simply understood and is written as such. But, with the existing algebra and operational calculus, one could easily implement the operator $\exp(\D_fe^{h\D_g})(g)$ by any of the efficient techniques available, as it is given by a generating function.
-          \end{opomba}
+
         
 \begin{lstlisting}
 template<class dTau, class K>
