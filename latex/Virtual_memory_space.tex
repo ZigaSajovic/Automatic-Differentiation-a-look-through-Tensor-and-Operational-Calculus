@@ -1,0 +1,205 @@
+\section{Virtual memory space}\label{sec:virtualMemory}
+
+We model an element of the virtual memory space $v\in\VV_n$ \cite[Definition~4.1]{OperationalCalculus}
+\begin{eqnarray}
+\VV_{n}=\VV_{n-1}\oplus(V_{n-1}\otimes\VV^*) \label{eq:V_n}
+\end{eqnarray}
+\begin{equation}
+\VV_{n}=\VV\oplus\VV\otimes\VV^*\oplus\cdots\oplus\VV\otimes\VV^{*n\otimes} \implies\VV_n=\VV\otimes T(\VV^*)
+\end{equation}
+with the class $var$.
+
+\begin{lstlisting}
+template<class V>
+class var
+{
+    public:
+    	int order;
+        V id;
+        std::shared_ptr<std::map<var*,var> >* dTau;
+
+        var();
+        var(V id);
+        var(const var& other);
+        ~var();
+        void init(int order);
+        var d(var* dVar);
+        //declerations of algebraic operations
+        //declerations of order logic
+};
+\end{lstlisting}
+
+The virtual memory space $\VV_n$ is the tensor product of the virtual memory $\VV$ with the tensor algebra of its dual. Tensor products of the virtual memory $\VV$ with its dual are modeled using maps, denoted by \emph{dTau}. The address \emph{var*} stands for the component of $v\in\VV_{n-1}$ with which the tensor product of the component of $v^*\in\VV^*$ was computed to generate $v\in\VV_n$ in equation \eqref{eq:V_n}. This depth is contained in the \emph{int order}.
+
+ \begin{izrek}
+ An instance of the class $var$ is an element of the virtual memory $\VV_n$.
+  \begin{equation}
+  var\in\VV_n
+  \end{equation}
+ \end{izrek}
+ \begin{proof}
+ \begin{equation}
+  id\in \VV\land  dTau\in \VV_{n-1}
+  \end{equation}
+  $$\land$$
+  \begin{equation}
+  var=id\oplus dTau\implies var\in\VV_n
+  \end{equation}
+ \end{proof}
+
+\subsection{Initialization}
+
+A constant element $v_0$ of the virtual memory is an element of $\VV_0=\VV<\VV_n$. We initialize an element to be $n$-differentiable, by mapping
+\begin{equation}
+init:\VV\times\mathbb{N}\to\VV_n,
+\end{equation}
+\begin{equation}
+v_0.init(n)=v_n\in\VV_n
+\end{equation}
+The image $v_n$ is an element of $\VV_1=\VV\otimes\VV^*$ with a natural inclusion in $\VV_n$.
+\begin{equation}
+v_n=(v_0\in\VV)+(\delta^i_j\in\VV\otimes\VV^ {*\otimes})+\sum\limits_{i=2}^n(0\in\VV\otimes\VV^ {*i\otimes}),
+\end{equation}
+where $\delta^i_j$ is the identity.
+
+\subsection{Algebra over a field}\label{sec:Algebra}
+
+ An algebra over a field is a vector space equipped with a bilinear product. Thus, an algebra is an algebraic structure which consists of a set, together with operations of multiplication, addition, and scalar multiplication by elements of the underlying field. \cite[p.~3]{Algebra}
+ 
+We will construct the algebra by mimicking the application of a direct sum of operators $\sumd_n$ \eqref{eq:sumd} mapping $\dP_0\oplus\dP_0\to\dP_n$ to the maps of scalar multiplication, addition and a bilinear product. 
+Their differentiable compositions are modeled by mimicking projections of the operator of program composition \cite[Theorem~5.3]{OperationalCalculus}
+ \begin{equation}\label{eq:kom}
+   \exp(\D_fe^{h\D_g}): \dP\to \dP\to\dP_\infty.
+   \end{equation}
+and fixing one of the mappings \cite[eq.~44,~45]{OperationalCalculus}. If one would prefer the implementation through application of operators to appropriate mappings, to the explicit implementation of this section, one can do so with the operators from section \ref{sec:operators}.
+
+\subsubsection{Vector space over a field $K$}\label{sec:vectorSpace}
+ 
+As part of the construction of an algebra, we construct a vector space $\VV_n$ over a field $K$. A vector space is a collection of objects that can be added together and multiplied with elements of the underlying field $K$.
+
+We begin with scalar multiplication.
+
+\begin{lstlisting}
+template<class K>
+var var::operator*(K n)const{
+    var out;
+    out.id=this->id*n;
+    for_each_copy(...,mul_make_pair<pair<var*,var> >, n);
+    return out;
+}
+
+template<class K>
+var var::operator/(K n)const {...};
+\end{lstlisting}
+Scalar multiplication and its convenient inverse employ the function \emph{for\_each\_copy}, applying the provided operation 
+\begin{lstlisting}
+template<class V, class K>
+V mul_make_pair(V v, K n) {
+    return std::make_pair(v.first, v.second * n);
+}
+\end{lstlisting}
+to each one of the components of $this$ and storing the result in $out.dTau$.
+
+Vector addition by component is implemented by 
+\begin{lstlisting}
+var var::operator+(const var& v)const{
+    var out;
+    out.id=this->id+v.id;
+    merge_apply(..., sum_pairs<pair<var*, var> >);
+    return out;
+}
+\end{lstlisting}
+Vector addition by component employs the function \emph{merge\_apply}, applying the provided function \emph{sum\_pairs}
+\begin{lstlisting}
+template<class V>
+T sum_pairs(V v1, V v2) {
+    return std::make_pair(v1.first, v1.second + v2.second);
+}
+\end{lstlisting}
+to corresponding components, storing the result in $out.dTau$.
+
+\begin{izrek}
+Class $var$ models a vector space over a field $K$.
+\end{izrek}
+\begin{proof}
+By implementations of addition by components and multiplication with a scalar $k\in K$, the axioms of the vector space are satisfied.
+\end{proof}
+
+\subsubsection{Algebra over a field $K$}\label{sec:algebra}
+
+To construct an algebra over a field $K$, we equip the vector space $\VV_n$ with a bilinear product by components.
+
+\begin{lstlisting}
+var var::operator*(const var& v)const{
+    var out;
+    out.id=this->real*v.id;
+    out.order=this->order<v.order?this->order:v.order;
+    if(out.order>0){
+        map<int,double> tmp1;
+        map<int,double> tmp2;
+        for_each_copy(...,mul_make_pair<pair<var*,var> >, 
+          v.reduce());
+        for_each_copy(...,mul_make_pair<pair<var*,var> >, 
+          this->reduce());
+        merge_apply(..., sum_pairs<pair<var*,var> >);
+    }
+    return out;
+}
+\end{lstlisting}
+The employed functions have been explained at previously use. The function \emph{reduce} makes a shallow copy of $this$, while reducing the order of the returned copy (making it one time less differentiable). This bilinear product contains Leibniz rule within its structure, as the projection of the operator $\exp(\D_fe^{h\D_g})(g): \dP\to\dP_\infty(g)$ to the unit $n$-cube was applied to the algebra.
+
+\begin{izrek}
+Class $var$ models an algebra over a field $K$.
+\end{izrek}
+\begin{proof}
+By the implementation of a bilinear product by components the axioms of an algebra over a field are satisfied.
+\end{proof}
+
+We may now trivially implement the remaining operators existing in the algebra.
+
+\begin{lstlisting}
+var var::operator-(const var& v)const{
+    return *this+(-1)*v;
+}
+
+var var::operator/(const var& v)const{
+    return *this*(v^(-1));
+}
+\end{lstlisting}
+Similarly, the following operators can be assumed to be generated by the existing algebra.
+
+\begin{lstlisting}
+var operator*(double n)const;
+var operator+(double n)const;
+var operator-(double n)const;
+var operator/(double n)const;
+var operator^(double n) const;
+var& operator=(const var& v);
+var& operator+=(const var& v);
+var& operator-=(const var& v);
+var& operator*=(const var& v);
+var& operator/=(const var& v);
+var& operator*=(double n);
+var& operator/=(double n);
+var& operator+=(double n);
+var& operator-=(double n);
+var operator*(double n, const var& v);
+var operator+(double n, const var& v);
+var operator-(double n, const var& v);
+var operator/(double n, const var& v);
+var operator^(double n, const var& v);
+\end{lstlisting} 
+
+Order logic is trivially implemented, by mapping
+\begin{equation}
+\VV.id\times\VV.id\to\{0,1\}.
+\end{equation}
+\begin{lstlisting}
+bool operator==(const var& v)const;
+bool operator!=(const var& v)const;
+bool operator<(const var& v)const;
+bool operator<=(const var& v)const;
+bool operator>(const var& v)const;
+bool operator>=(const var& v)const;
+\end{lstlisting}
+
