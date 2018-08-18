@@ -1,4 +1,22 @@
 \subection{Differentiable Derivatives}\label{sec:orderReduction}
  
-The ability to treat the $k$-th derivative of a program, as part of a different differentiable program appears useful in many fields. To that purpose, we must be able to threat the derivative itself as a differentiable program. This is easily done given our minimal implementation, as we are dealing only with the projections of the operators to the unit $N$-cube.
+The ability to treat the $k$-th derivative of a program, as part of a different differentiable program appears useful in many fields. To that purpose, we must be able to threat the derivative itself as a differentiable program. This is easily done given our minimal implementation, as we are working solely with the projections of the operators to the unit $N$-cube.
+
+\begin{izrek}\label{izr:reductionMap}
+There exists a reduction of order map $\phi:\dP_n\to \dP_{n-1}$, such that the
+following  diagram commutes
+\begin{equation}\label{eq:reductionMap}
+\begin{tikzcd}
+  \dP_n \arrow{r}{\phi} \arrow{d}{\D} & 
+  \dP_{n-1} \arrow{d}{\D}\\
+  \dP_{n+1} \arrow{r}{\phi} & 
+  \dP_{n}
+\end{tikzcd}
+\end{equation}
+satisfying
+\begin{equation}
+\forall_{P_1\in\dP_0}\exists_{P_2\in\dP_0}\Big(\phi^k\circ \sumd_n(P_1)=\sumd_{n-k}(P_2)\Big)
+\end{equation}
+for each $n\ge 1$.
+\end{izrek}  
 
