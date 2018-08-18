@@ -1,6 +1,6 @@
 \subection{Differentiable Derivatives}\label{sec:orderReduction}
  
-The ability to treat the $k$-th derivative of a program, as part of a different differentiable program appears useful in many fields. To that purpose, we must be able to threat the derivative itself as a differentiable program. This is easily done given our minimal implementation, as we are working solely with the projections of the operators to the unit $N$-cube.
+The ability to treat the $k$-th derivative of a program, as part of a different differentiable program appears useful in many fields. To that purpose, we must be able to threat the derivative itself as a differentiable program. This is easily done given our minimal implementation, as we are working solely with the projections of the operators to the unit $N$-cube, which simplifies things for us.
 
 \begin{izrek}\label{izr:reductionMap}
 There exists a reduction of order map $\phi:\dP_n\to \dP_{n-1}$, such that the
@@ -19,4 +19,9 @@ satisfying
 \end{equation}
 for each $n\ge 1$.
 \end{izrek}  
-
+\begin{corollary}\label{cor:extraxtDerivatives}
+By Theorem \ref{izr:reductionMap}, $n$-differentiable $k$-th derivatives of a program $P\in\dP_0$ can be extracted by
+\begin{equation}
+^{n}P^{k\prime}=\phi^k\circ \sumd_{n+k}(P)\in\dP_n
+\end{equation}
+\end{corollary}
