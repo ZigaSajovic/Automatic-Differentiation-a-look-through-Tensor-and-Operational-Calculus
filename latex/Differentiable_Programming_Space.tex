@@ -2,7 +2,7 @@
 
 With the algebra over $\VV_n$ implemented, we turn towards constructing a differentiable programming space, from the programming space
               
-\begin{equation}
+\begin{equation}\label{eq:cc}
 \CC:\VV\to\VV.
 \end{equation}
 
@@ -25,26 +25,18 @@ for any $k\in\mathbb{N}$. \cite[Theorem~4.1]{OperationalCalculus}
 
 It follows from Theorem \ref{izr:P} that a differentiable programming space of order $n$, $\dP_n:\VV\to\VV\otimes T(\VV^*)$ can be embedded into the tensor product space of the programming space $\dP_0$ and the space $T_n(\VV^*)$ of multi-tensors of order less than equal $n$ \cite[Corollary~4.1.1]{OperationalCalculus}. This means that all that the tuple $(\VV,\dP_0)$ - together with the structure of the tensor algebra $T(\VV^*)$ - is sufficient for constructing arbitrary differentiable programming spaces $\dP_n$.
               
+For the specific case of \eqref{eq:cc} this means
+\begin{equation}
+\DD^n\CC<\dP_n\iff\DD^n\CC\subset\CC\otimes T(\VV^*)
+\end{equation}
+which we will ensure by our implementation of \eqref{eq:cc}.
 
              
 \subsection{Virtual tensor machine}\label{sec:analyticVmachine}
 
 In this subsection we provide a minimal implementation of a virtual tensor machine, together with the pullback of \eqref{eq:sumd} through an arbitrary program. This is equivalent to the projection of the operator of program composition to the unit hyper-cube. 
 
-\begin{definicija}[Virtual tensor machine]
-The tuple $M=\langle \VV,\dP_0\rangle$ is an analytic, infinitely  differentiable virtual machine, where
-   
-    \begin{itemize}
-    \item
-    $\VV$ is a finite dimensional vector space
-    \item
-    $\VV\otimes T(\VV^*)$ is the virtual memory space
-    \item
-    $\dP_0$ is an analytic programming space over $\VV$.
-    \end{itemize}
-  \end{definicija}
-
-  \subsection{Operators}\label{sec:operators}
+\subsection{Operators}\label{sec:operators}
 
 The operator of tensor series expansion \cite[Theorem~5.1]{OperationalCalculus}
 
