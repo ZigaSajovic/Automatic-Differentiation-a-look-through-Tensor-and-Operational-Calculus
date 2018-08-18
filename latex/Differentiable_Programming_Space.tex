@@ -22,17 +22,14 @@ With the algebra over $\VV_n$ implemented, we turn towards constructing a differ
     \end{equation}
 for any $k\in\mathbb{N}$. \cite[Theorem~4.1]{OperationalCalculus}
 \end{izrek}
-              
-              Thus, in order to have a differential programming space, we must provide closure under the differential operator \cite[Corollary~10]{OperationalCalculus}, for the function space $\CC$, expanded by the tensor product with the tensor algebra of the dual of the virtual memory $\VV$.
-              
-              \begin{equation}
-              \DD^n\CC<\dP_n\iff\DD^n\CC\subset\CC\otimes T(\VV^*)
-              \end{equation}
 
+It follows from Theorem \ref{izr:P} that a differentiable programming space of order $n$, $\dP_n:\VV\to\VV\otimes T(\VV^*)$ can be embedded into the tensor product space of the programming space $\dP_0$ and the space $T_n(\VV^*)$ of multi-tensors of order less than equal $n$ \cite[Corollary~4.1.1]{OperationalCalculus}. This means that all that the tuple $(\VV,\dP_0)$ - together with the structure of the tensor algebra $T(\VV^*)$ - is sufficient for constructing arbitrary differentiable programming spaces $\dP_n$.
+              
 
+             
 \subsection{Virtual tensor machine}\label{sec:analyticVmachine}
 
-In this subsection we provide a minimal implementation of a virtual tensor machine, together with the pullback of \eqref{q:sumd} through an arbitrary program. This is equivalent to the projection of the operator of program composition to the unit hyper-cube. 
+In this subsection we provide a minimal implementation of a virtual tensor machine, together with the pullback of \eqref{eq:sumd} through an arbitrary program. This is equivalent to the projection of the operator of program composition to the unit hyper-cube. 
 
 \begin{definicija}[Virtual tensor machine]
 The tuple $M=\langle \VV,\dP_0\rangle$ is an analytic, infinitely  differentiable virtual machine, where
