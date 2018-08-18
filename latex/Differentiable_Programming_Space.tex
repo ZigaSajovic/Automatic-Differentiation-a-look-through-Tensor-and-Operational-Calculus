@@ -54,15 +54,11 @@ The expression \eqref{eq:DD} obeys the recursive relation
       \label{eq:rekurzija}
       \sumd_{k+1} = 1+\D\sumd_k,
     \end{equation}
-which can be used for constructing programming spaces of arbitrary order. Note that only explicit knowledge of $\tau_1:\dP_0\to\dP_1$ is required \cite[Proposition~5.1]{OperationalCalculus}.
-
-Compositions of these operators is achieved by mimicking the generalized pullback operator \cite[Remark~11]{OperationalCalculus}
+which can be used for constructing programming spaces of arbitrary order. Note that only explicit knowledge of $\tau_1:\dP_0\to\dP_1$ is required \cite[Proposition~5.1]{OperationalCalculus}. We perform its pullback through an arbitrary program by mimicking the operator of program composition \cite[Theorem~5.2]{OperationalCalculus}
 \begin{equation}\label{eq:opKompo}
-  \exp(\D_fe^{h\D_g})(g): \dP\to\dP_\infty(g),
+  \exp(\D_fe^{h\D_g}): \dP\to\dP\to\dP_\infty,
   \end{equation}
-  projected onto the unit N-cube.         
-
-The \emph{double id} stands for the identity operator $1$ in expression \eqref{eq:rekurzija}, while the \emph{map<var*, var> dTau} stands for the operator $\D\sumd_k$.
+partially evaluating on the second map and projecting it onto the unit $N$-cube.         
         
 \begin{lstlisting}
 template<class dTau, class K>
