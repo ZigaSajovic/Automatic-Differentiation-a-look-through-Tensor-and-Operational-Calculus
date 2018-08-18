@@ -27,3 +27,9 @@ By Theorem \ref{izr:reductionMap}, $n$-differentiable $k$-th derivatives of a pr
 \end{corollary}
 
 Given that we are only interested in computing (differentiable) derivatives of programs (i.e. automatic differentiation), and do not need the algebra of higher-order constructs the full treatment of operational calculus would afford us, we are working entirely on the unite $N$-cube. Hence, our reduction of order map is a simple projection to the $(N-1)$-cube.
+
+\begin{lstlisting}
+var var::d(var* dvar){
+    return (*this->dTau.get())[dvar];
+}
+\end{lstlisting}
