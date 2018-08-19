@@ -28,8 +28,14 @@ By Theorem \ref{izr:reductionMap}, $n$-differentiable $k$-th derivatives of a pr
 
 Given that we are only interested in computing (differentiable) derivatives of programs (i.e. automatic differentiation), and do not need the algebra of higher-order constructs the full treatment of operational calculus would afford us, we are working entirely on the unite $N$-cube. Hence, our reduction of order map is a simple projection to the $(N-1)$-cube.
 
+The reduction of order map $d:\dP_n\toVV\to\dP_{n-1}$,
 \begin{lstlisting}
 var var::d(var* dvar){
     return (*this->dTau.get())[dvar];
 }
 \end{lstlisting}
+returning an $(n-1)$-differentiable derivative with respect to $dvar$, is explicitly expressed as
+\begin{equation}
+v=v.id+\sum\limits_{\forall_i}v.d(\&v_i)\otimes dv_i \in\VV_n\implies v.d(\&v_i)\in\VV_{n-1}.
+\end{equation}
+
