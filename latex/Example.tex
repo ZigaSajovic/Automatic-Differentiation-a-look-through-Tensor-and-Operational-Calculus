@@ -19,10 +19,10 @@ We construct the map $sin$ explicitly for educational purposes.
 \begin{lstlisting}
 var dC::sin(const var& v){
     var out;
-    out.id=std::sin(v.id);
-    out.order=v.order;
+    out.id = std::sin(v.id);
+    out.order = v.order;
     if(v.order>0){
-    	for_each_copy(...,mul_make_pair<std::pair<var*,var> >,
+    	for_each_copy(..., mul_make_pair<std::pair<var*,var> >,
     		dCpp::cos(v.reduce()));
     }
     return out;
@@ -37,18 +37,18 @@ var dCpp::cos_primitive(cont &var v){
     return (-1)*sin(v);
 }
 
-dCpp::cos=tau<dTau, F>(std::cos, dCpp::cos_primitive);
+dCpp::cos = tau<dTau, F>(std::cos, dCpp::cos_primitive);
 
 var dCpp::ln_primitive(cont &var v){
     return 1/v;
 }
 
-dCpp::ln=tau<dTau, F>(std::ln, dCpp::ln_primitive);
+dCpp::ln = tau<dTau, F>(std::ln, dCpp::ln_primitive);
 
 dCpp::e_primitive(cont &var v){
     return e(v);
 }
 
-tau dCpp::e=tau<dTau, F>(std::e, dCpp::e_primitive);
+tau dCpp::e = tau<dTau, F>(std::e, dCpp::e_primitive);
 
 \end{lstlisting}
