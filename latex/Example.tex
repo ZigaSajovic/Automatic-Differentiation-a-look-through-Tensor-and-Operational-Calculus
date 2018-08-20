@@ -22,7 +22,7 @@ var dC::sin(const var& v){
     out.id = std::sin(v.id);
     out.order = v.order;
     if(v.order>0){
-    	for_each_copy(..., mul_make_pair<std::pair<var*,var> >,
+    	for_each_copy(..., mul_make_pair<std::pair<var*, var> >,
     		dCpp::cos(v.reduce()));
     }
     return out;
