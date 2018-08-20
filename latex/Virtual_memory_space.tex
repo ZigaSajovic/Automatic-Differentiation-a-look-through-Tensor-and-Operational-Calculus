@@ -16,7 +16,7 @@ class var
     public:
     	int order;
         V id;
-        std::shared_ptr<std::map<var*,var> >* dTau;
+        std::shared_ptr<std::map<var*, var> >* dTau;
 
         var();
         var(V id);
@@ -85,8 +85,8 @@ We begin with scalar multiplication.
 template<class K>
 var var::operator*(K n)const{
     var out;
-    out.id=this->id*n;
-    for_each_copy(...,mul_make_pair<pair<var*,var> >, n);
+    out.id = this->id*n;
+    for_each_copy(..., mul_make_pair<pair<var*, var> >, n);
     return out;
 }
 
@@ -106,7 +106,7 @@ Vector addition by component is implemented by
 \begin{lstlisting}
 var var::operator+(const var& v)const{
     var out;
-    out.id=this->id+v.id;
+    out.id = this->id+v.id;
     merge_apply(..., sum_pairs<pair<var*, var> >);
     return out;
 }
@@ -134,16 +134,16 @@ To construct an algebra over a field $K$, we equip the vector space $\VV_n$ with
 \begin{lstlisting}
 var var::operator*(const var& v)const{
     var out;
-    out.id=this->real*v.id;
-    out.order=this->order<v.order?this->order:v.order;
+    out.id = this->real*v.id;
+    out.order = this->order<v.order?this->order:v.order;
     if(out.order>0){
-        map<int,double> tmp1;
-        map<int,double> tmp2;
-        for_each_copy(...,mul_make_pair<pair<var*,var> >, 
+        map<int, double> tmp1;
+        map<int, double> tmp2;
+        for_each_copy(..., mul_make_pair<pair<var*, var> >, 
           v.reduce());
-        for_each_copy(...,mul_make_pair<pair<var*,var> >, 
+        for_each_copy(..., mul_make_pair<pair<var*, var> >, 
           this->reduce());
-        merge_apply(..., sum_pairs<pair<var*,var> >);
+        merge_apply(..., sum_pairs<pair<var*, var> >);
     }
     return out;
 }
