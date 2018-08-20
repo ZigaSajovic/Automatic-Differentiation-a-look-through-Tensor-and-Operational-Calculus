@@ -79,8 +79,8 @@ private:
 \begin{lstlisting}
 var tau::operator()(const var&v){
     var out;
-    out.id=mapping(v.id);
-    for_each_copy(...,mul_make_pair<std::pair<var*,var> >, 
+    out.idi = mapping(v.id);
+    for_each_copy(..., mul_make_pair<std::pair<var*, var> >, 
       primitive(v.reduce()));
     return out;
 }
