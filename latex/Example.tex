@@ -37,13 +37,13 @@ var dCpp::cos_primitive(cont $var v){
     return (-1)*sin(v);
 }
 
-dCpp::cos=tau<dTau,F>(cos_double,cos_primitive);
+dCpp::cos=tau<dTau,F>(std::cos, cos_primitive);
 
 var dCpp::ln_primitive(cont $var v){
     return 1/v;
 }
 
-dCpp::ln=tau<dTau,F>(ln_double,ln_primitive);
+dCpp::ln=tau<dTau,F>(std::ln, ln_primitive);
 
 dCpp::e_primitive(cont $var v){
     return e(v);
