@@ -28,3 +28,27 @@ var dC::sin(const var& v){
     return out;
 }
 \end{lstlisting}
+Other maps are constructed by employing the operator \eqref{eq:rekurzija}.
+\begin{lstlisting}
+typedef var (*dTau)(var);
+typedef double (*F)(double);
+
+var dCpp::cos_primitive(cont $var v){
+    return (-1)*sin(v);
+}
+
+dCpp::cos=tau<dTau,F>(cos_double,cos_primitive);
+
+var dCpp::ln_primitive(cont $var v){
+    return 1/v;
+}
+
+dCpp::ln=tau<dTau,F>(ln_double,ln_primitive);
+
+dCpp::e_primitive(cont $var v){
+    return e(v);
+}
+
+tau dCpp::e=tau<dTau,F>(e_double,e_primitive);
+
+\end{lstlisting}
