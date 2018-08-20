@@ -60,19 +60,19 @@ which can be used for constructing programming spaces of arbitrary order. Note t
   \end{equation}
 partially evaluating on the second map and projecting it onto the unit $N$-cube.         
 
-In our definition of the class \emph{tau}, we let \emph{K} model the image of the identity ($1$) and \emph{dTau} model the image of $\D\tau_{k-1}$ from the expression \eqref{eq:rekurzija} after application. The former is of the type $P:\VV\to\VV$, representing the mapping, and the latter of type $dTau:\VV\to\VV_{k-1}$, representing its differentiable derivative.  
+In our definition of the class \emph{tau}, we let \emph{K} model the image of the identity ($1$) and \emph{dTau} model the image of $\D\tau_{k-1}$ from the expression \eqref{eq:rekurzija} after application. The former is of the type $F:K\to K$, representing the mapping from the underlying field to itself, and the latter of type $dTau:\VV\to\VV_{k-1}$, representing its differentiable derivative.  
 \begin{lstlisting}
-template<class dTau, class P>
+template<class dTau, class K>
 class tau
 {
 public:
     tau();
-    tau(P mapping, dTau primitive);
+    tau(F mapping, dTau primitive);
     ~tau();
     var operator()(const var&v);
 private:
     dTau primitive;
-    P mapping;
+    F mapping;
 };
 \end{lstlisting}        
         
