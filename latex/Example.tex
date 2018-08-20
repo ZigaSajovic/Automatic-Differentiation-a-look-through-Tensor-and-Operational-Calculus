@@ -1,6 +1,6 @@
 \subsection{Example}
 
-We conclude with employing the constructed operators and the tensor algebra of the virtual memory space to implement a minimal differentiable programming space \emph{dCpp}.
+We conclude by employing the constructed operators and the tensor algebra of the virtual memory space to implement a minimal differentiable programming space \emph{dCpp}.
 
 \begin{lstlisting}
 namespace dCpp{
@@ -14,4 +14,17 @@ namespace dCpp{
 }
 \end{lstlisting}
 
+We construct the map $sin$ explicitly for educational purposes.
 
+\begin{lstlisting}
+var dC::sin(const var& v){
+    var out;
+    out.id=std::sin(v.id);
+    out.order=v.order;
+    if(v.order>0){
+    	for_each_copy(...,mul_make_pair<std::pair<var*,var> >,
+    		dCpp::cos(v.reduce()));
+    }
+    return out;
+}
+\end{lstlisting}
