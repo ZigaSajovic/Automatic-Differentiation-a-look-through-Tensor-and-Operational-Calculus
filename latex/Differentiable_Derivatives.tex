@@ -31,7 +31,7 @@ Given that we are only interested in computing (differentiable) derivatives of p
 We construct the reduction of order map $d:\dP_n\to\VV\to\dP_{n-1}$,
 \begin{lstlisting}
 var var::d(var* dvar){
-    return (*this->dTau.get())[dvar];
+    return (*this -> dTau.get())[dvar];
 }
 \end{lstlisting}
 returning an $(n-1)$-differentiable derivative with respect to $v_i$. It nature is further explained by
