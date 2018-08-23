@@ -2,7 +2,7 @@
  
 The ability to treat the $k$-th derivative of a program, as part of a different differentiable program appears useful in many fields. To that purpose, we must be able to threat the derivative itself as a differentiable program. This is easily implemented given our simplified construction, as we are working solely with the projections of the operators to the unit $N$-cube, which eases our troubles.
 
-\begin{izrek}\label{izr:reductionMap}
+\begin{theorem}\label{izr:reductionMap}
 There exists a reduction of order map $\phi:\dP_n\to \dP_{n-1}$, such that the
 following  diagram commutes
 \begin{equation}\label{eq:reductionMap}
@@ -18,7 +18,7 @@ satisfying
 \forall_{P_1\in\dP_0}\exists_{P_2\in\dP_0}\Big(\phi^k\circ \sumd_n(P_1)=\sumd_{n-k}(P_2)\Big)
 \end{equation}
 for each $n\ge 1$.
-\end{izrek}  
+\end{theorem}  
 \begin{corollary}\label{cor:extraxtDerivatives}
 By Theorem \ref{izr:reductionMap}, $n$-differentiable $k$-th derivatives of a program $P\in\dP_0$ can be extracted by
 \begin{equation}
