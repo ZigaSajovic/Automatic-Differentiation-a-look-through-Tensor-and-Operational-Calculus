@@ -31,12 +31,12 @@ class var
 
 The virtual memory space $\VV_n$ is the tensor product of the virtual memory $\VV$ with the tensor algebra of its dual. Tensor products of the virtual memory $\VV$ with its dual are modeled using maps, denoted by \emph{dTau}. The address \emph{var*} stands for the component of $v\in\VV_{n-1}$ with which the tensor product of the component of $v^*\in\VV^*$ was computed to generate $v\in\VV_n$ in equation \eqref{eq:V_n}. This depth is contained in the \emph{int order}.
 
- \begin{izrek}
+ \begin{theorem}
  An instance of the class $var$ is an element of the virtual memory $\VV_n$.
   \begin{equation}
   var\in\VV_n
   \end{equation}
- \end{izrek}
+ \end{theorem}
  \begin{proof}
  \begin{equation}
   id\in \VV\land  dTau\in \VV_{n-1}
@@ -120,9 +120,9 @@ T sum_pairs(V v1, V v2) {
 \end{lstlisting}
 to corresponding components, storing the result in $out.dTau$.
 
-\begin{izrek}
+\begin{theorem}
 Class $var$ models a vector space over a field $K$.
-\end{izrek}
+\end{theorem}
 \begin{proof}
 By implementations of addition by components and multiplication with a scalar $k\in K$, the axioms of the vector space are satisfied.
 \end{proof}
@@ -150,9 +150,9 @@ var var::operator*(const var& v)const{
 \end{lstlisting}
 The employed functions have been explained at previously use. The function \emph{reduce} makes a shallow copy of $this$, while reducing the order of the returned copy (making it one time less differentiable). This bilinear product contains Leibniz rule within its structure, as the projection of the operator $\exp(\D_fe^{h\D_g})(g): \dP\to\dP_\infty(g)$ to the unit $n$-cube was applied to the algebra.
 
-\begin{izrek}
+\begin{theorem}
 Class $var$ models an algebra over a field $K$.
-\end{izrek}
+\end{theorem}
 \begin{proof}
 By the implementation of a bilinear product by components the axioms of an algebra over a field are satisfied.
 \end{proof}
