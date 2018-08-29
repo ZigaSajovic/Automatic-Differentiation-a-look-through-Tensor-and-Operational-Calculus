@@ -1,6 +1,6 @@
 # Automatic Differentiation: a look through Tensor and Operational Calculus
 
-Repository for the paper Automatic Differentiation through Tensor and Operational Calculus
+Repository for the paper Automatic Differentiation: a look through Tensor and Operational Calculus
 
 ## Abstract
 
