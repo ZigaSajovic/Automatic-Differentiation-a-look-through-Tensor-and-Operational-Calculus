@@ -18,7 +18,7 @@ namespace dCpp{
 \noindent We construct the map $sin$ explicitly for educational purposes.
 
 \begin{lstlisting}
-var dC::sin(const var& v){
+var dCpp::sin(const var& v){
     var out;
     out.id = std::sin(v.id);
     out.order = v.order;
@@ -35,7 +35,7 @@ typedef var (*dTau)(var);
 typedef double (*F)(double);
 
 var dCpp::cos_primitive(cont &var v){
-    return (-1)*sin(v);
+    return (-1)*dCpp::sin(v);
 }
 
 dCpp::cos = tau<dTau, F>(std::cos, dCpp::cos_primitive);
@@ -47,7 +47,7 @@ var dCpp::ln_primitive(cont &var v){
 dCpp::ln = tau<dTau, F>(std::ln, dCpp::ln_primitive);
 
 dCpp::e_primitive(cont &var v){
-    return e(v);
+    return dCpp::e(v);
 }
 
 tau dCpp::e = tau<dTau, F>(std::e, dCpp::e_primitive);
